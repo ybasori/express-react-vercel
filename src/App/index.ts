@@ -27,4 +27,4 @@ ExpandRouter(Routes()).forEach((item) =>
 //   res.end(`Item: ${slug}`);
 // });
 
-export default app;
+export = app;
