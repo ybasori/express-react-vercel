@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/src/App.ts",
+      "destination": "/src/App.ts"
     }
   ]
 }
