@@ -1,4 +1,4 @@
 #!/bin/bash
  
 npm run build
-npm run start
+node ./dist/index.js
