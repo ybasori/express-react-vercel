@@ -17,7 +17,7 @@ const app = (0, express_1.default)();
 //       )
 //     : null
 // );
-app.get("/", (_req, res) => {
+app.get("/api", (_req, res) => {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     res.end(`nice`);
