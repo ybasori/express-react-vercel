@@ -1,7 +1,7 @@
 import express from "express";
 
-import ExpandRouter from "./Helpers/ExpandRouter";
-import Routes from "./Routes";
+import ExpandRouter from "../Helpers/ExpandRouter";
+import Routes from "../Routes";
 
 const port = Number(process.env.PORT || 5000);
 
