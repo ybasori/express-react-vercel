@@ -1,20 +1,27 @@
 import express from "express";
 
 // import { v4 } from "uuid";
-import ExpandRouter from "../Helpers/ExpandRouter";
-import Routes from "../Routes";
+// import ExpandRouter from "../Helpers/ExpandRouter";
+// import Routes from "../Routes";
+// import Home from "@/Controllers/Home/Home";
 
 const app = express();
 
-ExpandRouter(Routes()).forEach((item) =>
-  item.controller
-    ? app[item.method](
-        item.path,
-        item.middleware ? item.middleware : [],
-        item.controller
-      )
-    : null
-);
+// ExpandRouter(Routes()).forEach((item) =>
+//   item.controller
+//     ? app[item.method](
+//         item.path,
+//         item.middleware ? item.middleware : [],
+//         item.controller
+//       )
+//     : null
+// );
+
+app.get("/", (_req, res) => {
+  res.status(200).json({
+    status: "nice",
+  });
+});
 
 // app.get("/api", (req, res) => {
 //   const path = `/api/item/${v4()}`;
