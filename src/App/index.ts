@@ -18,7 +18,9 @@ const app = express();
 // );
 
 app.get("/", (_req, res) => {
-  res.status(200).json({
+  res.setHeader("Content-Type", "text/html");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  res.end().status(200).json({
     status: "nice",
   });
 });
