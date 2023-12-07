@@ -3,7 +3,7 @@ import express from "express";
 import ExpandRouter from "./Helpers/ExpandRouter";
 import Routes from "./Routes";
 
-const port = Number(80);
+const port = Number(process.env.PORT || 5000);
 
 const app = express();
 
