@@ -9,7 +9,7 @@ module.exports = {
   },
   entry: {
     server: {
-      import: "./src/index.ts",
+      import: "./src/App/index.ts",
     },
   },
   output: {
