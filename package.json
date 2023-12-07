@@ -8,8 +8,7 @@
     "dev": "npx nodemon",
     "build": "npx webpack --config webpack.prod.js",
     "start": "node -r dotenv/config ./dist/index.js ",
-    "lint": "npx eslint src/**/*.ts --fix",
-    "vercel-build": "echo \"hello\""
+    "lint": "npx eslint src/**/*.ts --fix"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
