@@ -20,8 +20,6 @@ const app = (0, express_1.default)();
 app.get("/", (_req, res) => {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.end().status(200).json({
-        status: "nice",
-    });
+    res.end(`nice`);
 });
 module.exports = app;
