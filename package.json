@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 11",
     "dev": "npx nodemon",
-    "build": "npx webpack --config webpack.prod.js",
+    "build": "tsc",
     "start": "node -r dotenv/config ./dist/index.js ",
     "lint": "npx eslint src/**/*.ts --fix"
   },

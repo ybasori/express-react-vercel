@@ -1,1 +1,11 @@
-(()=>{"use strict";var e={525:function(e,t,r){var a=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0});const s=a(r(860)),o=r(828),i=(0,s.default)();i.get("/api",((e,t)=>{const r=`/api/item/${(0,o.v4)()}`;t.setHeader("Content-Type","text/html"),t.setHeader("Cache-Control","s-max-age=1, stale-while-revalidate"),t.end(`Hello! Go to item: <a href="${r}">${r}</a>`)})),i.get("/api/item/:slug",((e,t)=>{const{slug:r}=e.params;t.end(`Item: ${r}`)})),t.default=i},860:e=>{e.exports=require("express")},828:e=>{e.exports=require("uuid")}},t={};!function r(a){var s=t[a];if(void 0!==s)return s.exports;var o=t[a]={exports:{}};return e[a].call(o.exports,o,o.exports,r),o.exports}(525)})();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const App_1 = __importDefault(require("./App"));
+const port = Number(process.env.PORT || 5000);
+App_1.default.listen(port, () => {
+    // eslint-disable-next-line no-console
+    console.log(`> ready on http://localhost:${port}`);
+});
