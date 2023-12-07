@@ -5,7 +5,7 @@ import Routes from "../Routes";
 
 const app = express();
 
-ExpandRouter(Routes()).map((item) =>
+ExpandRouter(Routes()).forEach((item) =>
   item.controller
     ? app[item.method](
         item.path,
