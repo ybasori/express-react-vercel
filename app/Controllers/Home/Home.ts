@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-import path from "path";
 
 const Home: RequestHandler = (_req, res) => {
   res.send(`<!DOCTYPE html>
