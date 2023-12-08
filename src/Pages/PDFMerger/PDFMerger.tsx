@@ -113,6 +113,7 @@ const PDFMerger = () => {
               Select PDF files
             </Button>
             <input
+              multiple
               type="file"
               ref={selectFile}
               style={{ display: "none" }}
@@ -121,8 +122,11 @@ const PDFMerger = () => {
               defaultValue={undefined}
               onChange={(e) => {
                 if (e.currentTarget.files) {
-                  const file = e.currentTarget.files[0];
-                  setPdfFiles([...pdfFiles, file]);
+                  let files: File[] = [];
+                  for (let i = 0; i < e.currentTarget.files.length; i++) {
+                    files = [...files, e.currentTarget.files[i]];
+                  }
+                  setPdfFiles([...pdfFiles, ...files]);
                 }
               }}
             />
