@@ -4,10 +4,9 @@ import { IRoute } from "./Helpers/ExpandRouter";
 const Routes: () => IRoute[] = () => {
   return [
     {
-      path: "/",
+      path: "/*",
       method: "get",
       controller: Home,
-      children: [{ path: "/one", method: "get", controller: Home }],
     },
   ];
 };
