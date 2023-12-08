@@ -1,4 +1,4 @@
-import app = require("./App");
+import app from "./main";
 
 const port = Number(process.env.PORT || 5000);
 
