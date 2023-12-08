@@ -1,8 +1,15 @@
 import Navbar from "@src/Components/Organisms/Navbar/Navbar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    navigate("/pdf-merger");
+  }, [navigate]);
 
   return (
     <>

@@ -19,6 +19,7 @@ const About = React.lazy(() => import("./Pages/About/About"));
 const Login = React.lazy(() => import("./Pages/Login/Login"));
 const Register = React.lazy(() => import("./Pages/Register/Register"));
 const Profile = React.lazy(() => import("./Pages/Profile/Profile"));
+const PDFMerger = React.lazy(() => import("./Pages/PDFMerger/PDFMerger"));
 
 interface IScopeRoute {
   path?: string;
@@ -44,6 +45,10 @@ const router = createBrowserRouter(
     {
       path: "/about",
       element: <About />,
+    },
+    {
+      path: "/pdf-merger",
+      element: <PDFMerger />,
     },
     {
       path: "/",
