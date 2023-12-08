@@ -1,6 +1,6 @@
-import PDFMerger from "./Controllers/Api/V1/PdfMerger/PdfMerger";
 import multer from "multer";
 
+import PDFMerger from "./Controllers/Api/V1/PdfMerger/PdfMerger";
 import Home from "./Controllers/Home/Home";
 import { IRoute } from "./Helpers/ExpandRouter";
 
