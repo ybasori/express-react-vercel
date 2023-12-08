@@ -112,6 +112,7 @@ const PDFMerger = () => {
             <Button type="button" onClick={() => selectFile?.current?.click()}>
               Select PDF files
             </Button>
+            {/*  */}
             <input
               multiple
               type="file"
