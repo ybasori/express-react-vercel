@@ -1,6 +1,7 @@
+import { unlink } from "node:fs/promises";
+
 import { RequestHandler } from "express";
 import PDFMerger from "pdf-merger-js";
-import { unlink } from "node:fs/promises";
 
 const PdfMerger: RequestHandler = async (req, res) => {
   try {

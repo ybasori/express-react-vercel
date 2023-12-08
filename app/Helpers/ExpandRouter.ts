@@ -4,7 +4,7 @@ export interface IRoute {
   path: string;
   controller?: RequestHandler;
   children?: IRoute[];
-  method: "get" | "post" | "put" | "delete";
+  method?: "get" | "post" | "put" | "delete";
   middleware?: RequestHandler[];
 }
 
