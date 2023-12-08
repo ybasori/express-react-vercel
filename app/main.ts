@@ -6,7 +6,7 @@ import Routes from "./Routes";
 
 const app = express();
 
-app.use(express.static("./public"));
+// app.use(express.static("./public"));
 
 ExpandRouter(Routes()).forEach((item) =>
   item.controller && item.method
