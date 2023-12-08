@@ -132,23 +132,25 @@ const PDFMerger = () => {
         </form>
         <div className="columns is-multiline">
           {pdfFiles.map((pdf, idx) => (
-            <div className="column is-one-third tile box" key={`pdf-${idx}`}>
-              <div className="">
-                <embed
-                  src={URL.createObjectURL(pdf)}
-                  width="100%"
-                  height="150"
-                />
-                <br />
-                <Button
-                  onClick={() =>
-                    setPdfFiles([
-                      ...pdfFiles.filter((_item, number) => number !== idx),
-                    ])
-                  }
-                >
-                  Remove
-                </Button>
+            <div className="column is-one-third" key={`pdf-${idx}`}>
+              <div className=" tile box">
+                <div className="">
+                  <embed
+                    src={URL.createObjectURL(pdf)}
+                    width="100%"
+                    height="400"
+                  />
+                  <br />
+                  <Button
+                    onClick={() =>
+                      setPdfFiles([
+                        ...pdfFiles.filter((_item, number) => number !== idx),
+                      ])
+                    }
+                  >
+                    Remove
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
