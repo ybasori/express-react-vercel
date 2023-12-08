@@ -1,6 +1,5 @@
-import { unlink } from "node:fs/promises";
-
 import { RequestHandler } from "express";
+import { unlinkSync } from "fs";
 import PDFMerger from "pdf-merger-js";
 
 const PdfMerger: RequestHandler = async (req, res) => {
@@ -16,7 +15,7 @@ const PdfMerger: RequestHandler = async (req, res) => {
       await merger.save(`./public${mergedFile}`);
 
       for (let i: number = 0; i < totalFile; i++) {
-        await unlink(files[i].path);
+        unlinkSync(files[i].path);
       }
     }
     return res.status(200).json({
