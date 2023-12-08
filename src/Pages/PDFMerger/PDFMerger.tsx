@@ -2,6 +2,7 @@ import Button from "@src/Components/Atoms/Button/Button";
 import axios from "axios";
 import PdfMerger from "pdf-merger-js/browser";
 import React, { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 // import { toast } from "react-toastify";
 
 const PDFMerger = () => {
@@ -10,45 +11,52 @@ const PDFMerger = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   // const [mergedPdfUrl, setMergedPdfUrl] = useState("");
 
-  const onMerge = async () => {
-    const merger = new PdfMerger();
+  // eslint-disable-next-line no-unused-vars
+  const onMerge = async (cb: (err: unknown, url: string | null) => void) => {
+    try {
+      const merger = new PdfMerger();
 
-    for (const file of pdfFiles) {
-      await merger.add(file);
+      for (const file of pdfFiles) {
+        await merger.add(file);
+      }
+
+      const mergedPdf = await merger.saveAsBlob();
+      const url = URL.createObjectURL(mergedPdf);
+
+      cb(null, url);
+    } catch (err) {
+      cb(err, null);
     }
-
-    const mergedPdf = await merger.saveAsBlob();
-    const url = URL.createObjectURL(mergedPdf);
-
-    return new Promise((resolve) => {
-      // setMergedPdfUrl(url);
-      resolve(url);
-    });
   };
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    onMerge().then((url) => {
-      axios({
-        url: url as string,
-        method: "GET",
-        responseType: "blob",
-      }).then((response) => {
-        const href = URL.createObjectURL(response.data);
+    onMerge((err, url) => {
+      if (!err) {
+        axios({
+          url: url as string,
+          method: "GET",
+          responseType: "blob",
+        }).then((response) => {
+          const href = URL.createObjectURL(response.data);
 
-        const link = document.createElement("a");
-        link.href = href;
-        link.setAttribute(
-          "download",
-          (url as string).split("/")[(url as string).split("/").length - 1]
-        );
-        document.body.appendChild(link);
-        link.click();
+          const link = document.createElement("a");
+          link.href = href;
+          link.setAttribute(
+            "download",
+            (url as string).split("/")[(url as string).split("/").length - 1]
+          );
+          document.body.appendChild(link);
+          link.click();
 
-        document.body.removeChild(link);
-        URL.revokeObjectURL(href);
-      });
+          document.body.removeChild(link);
+          URL.revokeObjectURL(href);
+          toast.success("Downloading!");
+        });
+      } else {
+        toast.error("something went wrong!");
+      }
 
       setIsLoading(false);
     });
