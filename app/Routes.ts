@@ -1,4 +1,4 @@
-import multer from "multer";
+// import multer from "multer";
 
 import PDFMerger from "./Controllers/Api/V1/PdfMerger/PdfMerger";
 import Home from "./Controllers/Home/Home";
@@ -19,19 +19,19 @@ const Routes: () => IRoute[] = () => {
                 {
                   path: "/merge-pdf",
                   method: "post",
-                  middleware: [
-                    multer({
-                      storage: multer.diskStorage({
-                        destination: (_req, _file, cb) =>
-                          cb(null, "./public/uploads/"),
-                        filename: (_req, file, cb) =>
-                          cb(
-                            null,
-                            file.originalname + "-" + Date.now() + ".pdf"
-                          ),
-                      }),
-                    }).array("pdfFiles"),
-                  ],
+                  // middleware: [
+                  //   multer({
+                  //     storage: multer.diskStorage({
+                  //       destination: (_req, _file, cb) =>
+                  //         cb(null, "./public/uploads/"),
+                  //       filename: (_req, file, cb) =>
+                  //         cb(
+                  //           null,
+                  //           file.originalname + "-" + Date.now() + ".pdf"
+                  //         ),
+                  //     }),
+                  //   }).array("pdfFiles"),
+                  // ],
                   controller: PDFMerger,
                 },
               ],
