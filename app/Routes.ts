@@ -1,7 +1,8 @@
 import PDFMerger from "@app/Controllers/Api/V1/PdfMerger/PdfMerger";
+import multer from "multer";
+
 import Home from "./Controllers/Home/Home";
 import { IRoute } from "./Helpers/ExpandRouter";
-import multer from "multer";
 
 const Routes: () => IRoute[] = () => {
   return [
