@@ -2,13 +2,13 @@ import multer from "multer";
 
 import PDFMerger from "./Controllers/Api/V1/PdfMerger/PdfMerger";
 import Home from "./Controllers/Home/Home";
+import PDFMergerPage from "./Controllers/PDFMergerPage/PDFMergerPage";
 import { IRoute } from "./Helpers/ExpandRouter";
 
 const Routes: () => IRoute[] = () => {
   return [
     {
       path: "/",
-      method: "get",
       children: [
         {
           path: "/api",
@@ -29,6 +29,11 @@ const Routes: () => IRoute[] = () => {
               ],
             },
           ],
+        },
+        {
+          path: "/pdf-merger",
+          method: "get",
+          controller: PDFMergerPage,
         },
       ],
     },
