@@ -31,12 +31,7 @@ const PDFMerger = () => {
 
           const link = document.createElement("a");
           link.href = href;
-          link.setAttribute(
-            "download",
-            res.data.data.file.split("/")[
-              res.data.data.file.split("/").length - 1
-            ]
-          );
+          link.setAttribute("download", `merge-${Date.now()}.pdf`);
           document.body.appendChild(link);
           link.click();
 
