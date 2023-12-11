@@ -1,10 +1,8 @@
 import { RequestHandler } from "express";
-// import { unlinkSync } from "fs";
 import PDFMerger from "pdf-merger-js";
 
 const PdfMerger: RequestHandler = async (req, res) => {
   try {
-    const mergedFile = `/uploads/merged-${Date.now()}.pdf`;
     if (req.files) {
       const totalFile = Number(req.files ? req.files.length : 0);
       const files = [...(req.files as unknown as Express.Multer.File[])];
@@ -12,30 +10,26 @@ const PdfMerger: RequestHandler = async (req, res) => {
       for (let i: number = 0; i < totalFile; i++) {
         await merger.add(files[i].buffer);
       }
-      await merger.save(`./public${mergedFile}`);
+      const mergedPdfBuffer = await merger.saveAsBuffer();
 
-      // for (let i: number = 0; i < totalFile; i++) {
-      //   unlinkSync(files[i].path);
-      // }
+      return res.status(200).json({
+        status: "oke",
+        data: {
+          buffer: mergedPdfBuffer.toString("base64"),
+        },
+      });
     }
-    return res.status(200).json({
-      status: "oke",
-      data: {
-        file: mergedFile,
-      },
+    return res.status(400).json({
+      status: "bad",
+      data: null,
+      error: "no file found",
     });
   } catch (err) {
-    // return res.status(500).send(err);
     return res.status(500).json({
       status: "error",
       data: null,
       error: err,
     });
   }
-
-  // return res.status(200).json({
-  //   status: "oke",
-  //   data: null,
-  // });
 };
 export default PdfMerger;
