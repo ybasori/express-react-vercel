@@ -1,6 +1,6 @@
 import Button from "@src/Components/Atoms/Button/Button";
 import axios from "axios";
-import PdfMerger from "pdf-merger-js/browser";
+// import PdfMerger from "pdf-merger-js/browser";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 // import { toast } from "react-toastify";
@@ -12,67 +12,30 @@ const PDFMerger = () => {
   // const [mergedPdfUrl, setMergedPdfUrl] = useState("");
 
   // eslint-disable-next-line no-unused-vars
-  const onMerge = async (cb: (err: unknown, url: string | null) => void) => {
-    try {
-      const merger = new PdfMerger();
+  // const onMerge = async (cb: (err: unknown, url: string | null) => void) => {
+  //   try {
+  //     const merger = new PdfMerger();
 
-      for (const file of pdfFiles) {
-        await merger.add(file);
-      }
+  //     for (const file of pdfFiles) {
+  //       await merger.add(file);
+  //     }
 
-      const mergedPdf = await merger.saveAsBlob();
-      const url = URL.createObjectURL(mergedPdf);
+  //     const mergedPdf = await merger.saveAsBlob();
+  //     const url = URL.createObjectURL(mergedPdf);
 
-      cb(null, url);
-    } catch (err) {
-      cb(err, null);
-    }
-  };
+  //     cb(null, url);
+  //   } catch (err) {
+  //     cb(err, null);
+  //   }
+  // };
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    onMerge((err, url) => {
-      if (!err) {
-        axios({
-          url: url as string,
-          method: "GET",
-          responseType: "blob",
-        }).then((response) => {
-          const href = URL.createObjectURL(response.data);
-
-          const link = document.createElement("a");
-          link.href = href;
-          link.setAttribute(
-            "download",
-            (url as string).split("/")[(url as string).split("/").length - 1]
-          );
-          document.body.appendChild(link);
-          link.click();
-
-          document.body.removeChild(link);
-          URL.revokeObjectURL(href);
-          toast.success("Downloading!");
-        });
-      } else {
-        toast.error("something went wrong!");
-      }
-
-      setIsLoading(false);
-    });
-
-    // const fd = new FormData();
-
-    // pdfFiles.forEach((item) => {
-    //   fd.append(`pdfFiles`, item);
-    // });
-
-    // axios
-    //   .post("/api/v1/merge-pdf", fd)
-    //   .then((res) => {
-    //     setIsLoading(false);
+    // onMerge((err, url) => {
+    //   if (!err) {
     //     axios({
-    //       url: res.data.data.file,
+    //       url: url as string,
     //       method: "GET",
     //       responseType: "blob",
     //     }).then((response) => {
@@ -82,22 +45,59 @@ const PDFMerger = () => {
     //       link.href = href;
     //       link.setAttribute(
     //         "download",
-    //         res.data.data.file.split("/")[
-    //           res.data.data.file.split("/").length - 1
-    //         ]
+    //         (url as string).split("/")[(url as string).split("/").length - 1]
     //       );
     //       document.body.appendChild(link);
     //       link.click();
 
     //       document.body.removeChild(link);
     //       URL.revokeObjectURL(href);
+    //       toast.success("Downloading!");
     //     });
-    //     toast.success("Your file is ready!");
-    //   })
-    //   .catch(() => {
-    //     setIsLoading(false);
-    //     toast.error("Something went wrong!");
-    //   });
+    //   } else {
+    //     toast.error("something went wrong!");
+    //   }
+
+    //   setIsLoading(false);
+    // });
+
+    const fd = new FormData();
+
+    pdfFiles.forEach((item) => {
+      fd.append(`pdfFiles`, item);
+    });
+
+    axios
+      .post("/api/v1/merge-pdf", fd)
+      .then((res) => {
+        setIsLoading(false);
+        axios({
+          url: res.data.data.file,
+          method: "GET",
+          responseType: "blob",
+        }).then((response) => {
+          const href = URL.createObjectURL(response.data);
+
+          const link = document.createElement("a");
+          link.href = href;
+          link.setAttribute(
+            "download",
+            res.data.data.file.split("/")[
+              res.data.data.file.split("/").length - 1
+            ]
+          );
+          document.body.appendChild(link);
+          link.click();
+
+          document.body.removeChild(link);
+          URL.revokeObjectURL(href);
+        });
+        toast.success("Your file is ready!");
+      })
+      .catch(() => {
+        setIsLoading(false);
+        toast.error("Something went wrong!");
+      });
   };
   useEffect(() => {
     document.title = "Webivert - PDF Merger";
